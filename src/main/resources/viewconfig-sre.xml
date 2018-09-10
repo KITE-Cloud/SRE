@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<layout>
+    <VSNode splits="0.0 1.0">
+        <CNode>
+
+        </CNode>
+        <CNode>
+           <Component label="Single Rule Evaluation">
+               <Property id="pluginId" value="SRE_Plugin.SREViewComponent"/>
+           </Component>
+        </CNode>
+    </VSNode>
+</layout>

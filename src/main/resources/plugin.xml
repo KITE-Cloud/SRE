@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<?eclipse version="3.0"?>
+
+<plugin>
+
+	<extension id="SRETabComponent" point="org.protege.editor.core.application.WorkspaceTab">
+		<label value="SRE-Tab"/>
+		<class value="org.protege.editor.owl.ui.OWLWorkspaceViewsTab"/>
+		<index value="X"/>
+		<editorKitId value="OWLEditorKit"/>
+		<defaultViewConfigFileName value="viewconfig-sre.xml"/>
+   </extension>
+
+	<extension id="SREViewComponent" point="org.protege.editor.core.application.ViewComponent">
+		<label value="Single Rule Evaluation" />
+		<class value="view.SREProtegeView" />
+		<headerColor value="@org.protege.ontologycolor"/>
+		<category value="@org.protege.ontologycategory" />
+	</extension>
+
+</plugin>
