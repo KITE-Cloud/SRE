@@ -110,39 +110,33 @@ public class OWLUtil {
     }
 
      public OWLOntologyManager create(OWLOntology mainOntology, OWLOntology[] importOntologies) {
-        OWLOntologyManager m = OWLManager.createOWLOntologyManager();
+        OWLOntologyManager m = mainOntology.getOWLOntologyManager();
 
-        try {
+        /*try {
             OWLOntology mainOntologyCopy = null;
             InputStream inputStream;
             ByteArrayOutputStream outputStream = new ByteArrayOutputStream();
 
             try {
-                if(importOntologies != null)
-                for (OWLOntology importOntology : importOntologies) {
-                    importOntology.saveOntology(outputStream);
-                    inputStream = new ByteArrayInputStream(outputStream.toByteArray());
-                    m.loadOntologyFromOntologyDocument(inputStream);
-                }
 
-               // mainOntologyCopy = m.copyOntology(mainOntology, OntologyCopy.DEEP);
-                mainOntology.saveOntology(outputStream);
-                inputStream = new ByteArrayInputStream(outputStream.toByteArray());
-                m.loadOntologyFromOntologyDocument(inputStream);
-                mainOntologyCopy = m.getOntology(mainOntology.getOntologyID());
+
+
             } catch (OWLOntologyStorageException e) {
                 e.printStackTrace();
             }
 
-            Set<OWLImportsDeclaration> importsDeclarations = mainOntologyCopy.getImportsDeclarations();
+            Set<OWLImportsDeclaration> importsDeclarations = mainOntology.getImportsDeclarations();
 
             for (OWLImportsDeclaration importsDeclaration : importsDeclarations) {
-                m.applyChange(new AddImport(mainOntologyCopy, importsDeclaration));
+                m.applyChange(new AddImport(mainOntology, importsDeclaration));
             }
 
         } catch (OWLOntologyCreationException e) {
             e.printStackTrace();
         }
+
+        */
+
         dataFactory = m.getOWLDataFactory();
         return m;
     }

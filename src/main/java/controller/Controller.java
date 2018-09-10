@@ -65,7 +65,8 @@ public class Controller implements SREObserver, SREMainClient {
         Controller.printToLogger(getClass().getName(), "Add UI to the protege view", 0);
         protegeView.add(ruleEvaluationUI, BorderLayout.CENTER);
 
-        System.out.println("OWLUtil = " + this.owlUtil);
+        Controller.printToLogger(getClass().getName(), "Initialize Ontology Change listener", 0);
+        protegeView.getOWLModelManager().getActiveOntology().getOWLOntologyManager().addOntologyChangeListener(ruleEvaluationUI);
 
         Controller.printToLogger(getClass().getName(), "register as Eval Engine observer", 0);
         sreFacade.registerAsLogObserver(this);
@@ -102,9 +103,11 @@ public class Controller implements SREObserver, SREMainClient {
     public ArrayList<String> getSWRLRules() {
         ArrayList<String> swrlRulesAsString = new ArrayList<>();
         System.out.println("OWLUtil = " + owlUtil);
+
         List<SWRLAPIRule> swrlapiRules = owlUtil.getSWRLAPIRules();
         for (SWRLAPIRule swrlRule : swrlapiRules) {
             swrlRulesAsString.add(swrlRule.getRuleName() + ": " + owlUtil.getRuleRenderer().renderSWRLRule(swrlRule));
+            System.out.println(swrlRule.getRuleName() + ": " + owlUtil.getRuleRenderer().renderSWRLRule(swrlRule));
         }
 
         return swrlRulesAsString;

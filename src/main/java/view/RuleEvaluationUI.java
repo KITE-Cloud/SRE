@@ -13,12 +13,16 @@ import ca.uvic.cs.chisel.cajun.graph.ui.DefaultFlatGraphView;
 import controller.Constants;
 import controller.Controller;
 import de.thm.container.Node;
+import org.semanticweb.owlapi.model.OWLException;
+import org.semanticweb.owlapi.model.OWLOntologyChange;
+import org.semanticweb.owlapi.model.OWLOntologyChangeListener;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import services.GraphModelAdapter;
 import view.popUps.DialogParameterInput;
 import view.popUps.DialogPopUp;
 
+import javax.annotation.Nonnull;
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
@@ -26,11 +30,12 @@ import java.awt.event.ActionListener;
 import java.net.URL;
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.List;
 
 /**
  * Created by Jannik Geyer on 25.10.2017.
  */
-public class RuleEvaluationUI extends JPanel implements ActionListener, GraphNodeCollectionListener {
+public class RuleEvaluationUI extends JPanel implements ActionListener, GraphNodeCollectionListener, OWLOntologyChangeListener {
 
     private static final Logger log = LoggerFactory.getLogger(RuleEvaluationUI.class);
 
@@ -43,6 +48,7 @@ public class RuleEvaluationUI extends JPanel implements ActionListener, GraphNod
     private JPanel liveConsolePanel;
     private JTextArea liveConsole;
     private boolean consoleAdded;
+    private boolean evaluating;
 
     public RuleEvaluationUI() {
 
@@ -102,10 +108,18 @@ public class RuleEvaluationUI extends JPanel implements ActionListener, GraphNod
 
     public void fillRuleBox() {
         ArrayList<String> swrlRules = Controller.getInstance().getSWRLRules();
+        ruleBox.removeActionListener(this);
+
+        ActionListener[] actionListeners = ruleBox.getActionListeners();
+        for (ActionListener actionListener : actionListeners) {
+            ruleBox.removeActionListener(actionListener);
+        }
+
         if (ruleBox.getItemCount() > 0) ruleBox.removeAllItems();
         for (String renderedRule : swrlRules) {
             ruleBox.addItem(renderedRule);
         }
+        ruleBox.addActionListener(this);
         ruleBox.repaint();
     }
 
@@ -119,6 +133,8 @@ public class RuleEvaluationUI extends JPanel implements ActionListener, GraphNod
 
     @SuppressWarnings("Duplicates")
     public void updateGraphModel(Node evaluatedRootNode){
+
+        evaluating = false;
 
         GraphModelAdapter modelAdapter = new GraphModelAdapter();
         DefaultGraphModel graphModel = modelAdapter.getGraphModel(evaluatedRootNode);
@@ -177,6 +193,8 @@ public class RuleEvaluationUI extends JPanel implements ActionListener, GraphNod
     @Override
     public void actionPerformed(ActionEvent e) {
 
+        System.out.println("Actioncommand: " + e.getActionCommand());
+
         if (e.getActionCommand() == Constants.AC_RULE_BOX) {
             JComboBox<String> ruleBox = (JComboBox<String>) e.getSource();
 
@@ -188,7 +206,9 @@ public class RuleEvaluationUI extends JPanel implements ActionListener, GraphNod
         }
 
         if (e.getActionCommand() == Constants.AC_EVALUATE_RULE) {
+            evaluating = true;
             Controller.getInstance().executeEvaluation();
+
         }
 
         if (e.getActionCommand() == Constants.AC_LIVE_CONSOLE) {
@@ -242,4 +262,9 @@ public class RuleEvaluationUI extends JPanel implements ActionListener, GraphNod
     }
 
 
+    @Override
+    public void ontologiesChanged(@Nonnull List<? extends OWLOntologyChange> changes) throws OWLException {
+        if(!evaluating)
+            fillRuleBox();
+    }
 }
