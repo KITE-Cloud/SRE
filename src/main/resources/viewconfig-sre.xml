@@ -6,7 +6,7 @@
         </CNode>
         <CNode>
            <Component label="Single Rule Evaluation">
-               <Property id="pluginId" value="SRE_Plugin.SREViewComponent"/>
+               <Property id="pluginId" value="sre_plugin.SREViewComponent"/>
            </Component>
         </CNode>
     </VSNode>
