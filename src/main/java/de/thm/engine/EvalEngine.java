@@ -76,8 +76,8 @@ public class EvalEngine {
         if(owlUtil != null && swrlRule != null) {
 
             Updater.getInstance().sendLogInfo("EvalEngine: Start execution");
-            Updater.getInstance().sendLogInfo("Prepare EvalEngine and Ontology for execution");
-            this.prepareOntology();
+            //Updater.getInstance().sendLogInfo("Prepare EvalEngine and Ontology for execution");
+            //this.prepareOntology();
 
             Updater.getInstance().sendLogInfo("Generate Ruleslist");
             this.generateRulesList();

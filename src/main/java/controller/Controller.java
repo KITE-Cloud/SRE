@@ -57,16 +57,22 @@ public class Controller implements SREObserver, SREMainClient {
 
         Controller.printToLogger(getClass().getName(), "Create Facade instance", 0);
         sreFacade = new SREFacade();
-        owlUtil = sreFacade.initializeSRE(protegeView.getOWLModelManager().getReasoner(),protegeView.getOWLModelManager().getActiveOntology());
 
         Controller.printToLogger(getClass().getName(), "Create Main UI", 0);
         ruleEvaluationUI = new RuleEvaluationUI();
 
+        new Thread((Runnable) () -> {
+            owlUtil = sreFacade.initializeSRE(protegeView.getOWLModelManager().getReasoner(), protegeView.getOWLModelManager().getActiveOntology());
+            ruleEvaluationUI.fillRuleBox();
+        }).start();
+
         Controller.printToLogger(getClass().getName(), "Add UI to the protege view", 0);
         protegeView.add(ruleEvaluationUI, BorderLayout.CENTER);
 
-        Controller.printToLogger(getClass().getName(), "Initialize Ontology Change listener", 0);
-        protegeView.getOWLModelManager().getActiveOntology().getOWLOntologyManager().addOntologyChangeListener(ruleEvaluationUI);
+        new Thread((Runnable) () -> {
+            Controller.printToLogger(getClass().getName(), "Initialize Ontology Change listener", 0);
+            protegeView.getOWLModelManager().getActiveOntology().getOWLOntologyManager().addOntologyChangeListener(ruleEvaluationUI);
+        }).start();
 
         Controller.printToLogger(getClass().getName(), "register as Eval Engine observer", 0);
         sreFacade.registerAsLogObserver(this);

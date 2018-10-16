@@ -31,6 +31,8 @@ import java.net.URL;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
+import java.util.concurrent.ExecutorService;
+import java.util.concurrent.Executors;
 
 /**
  * Created by Jannik Geyer on 25.10.2017.
@@ -69,7 +71,7 @@ public class RuleEvaluationUI extends JPanel implements ActionListener, GraphNod
 
         ruleBar = new JPanel(new FlowLayout());
         ruleBox = new JComboBox<String>();
-        fillRuleBox();
+        //fillRuleBox();
         ruleBox.setPreferredSize(new Dimension(1000, (int) ruleBox.getPreferredSize().getHeight()));
         ruleBox.setActionCommand(Constants.AC_RULE_BOX);
         ruleBox.addActionListener(this);
@@ -261,10 +263,17 @@ public class RuleEvaluationUI extends JPanel implements ActionListener, GraphNod
         loadingAnimation.repaint();
     }
 
+    ExecutorService executorService = Executors.newFixedThreadPool(1);
 
     @Override
     public void ontologiesChanged(@Nonnull List<? extends OWLOntologyChange> changes) throws OWLException {
-        if(!evaluating)
-            fillRuleBox();
+        executorService.execute(new Runnable() {
+            @Override
+            public void run() {
+                if(!evaluating)
+                    fillRuleBox();
+            }
+        });
+
     }
 }
