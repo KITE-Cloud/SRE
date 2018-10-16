@@ -11,8 +11,8 @@
     </parent>
 
     <groupId>de.thm</groupId>
-    <artifactId>SRE_Plugin</artifactId>
-    <version>1.0</version>
+    <artifactId>sre_plugin</artifactId>
+    <version>0.2.0</version>
     <name>SRE-Tab</name>
     <description>SRE-Tab Plugin for Desktop Protege 5.0+</description>
     <packaging>bundle</packaging>

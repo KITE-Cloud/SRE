@@ -1,0 +1,11 @@
+Manifest-Version: 1.0
+Bundle-ManifestVersion: 2
+Bundle-Name: SRE-TAB
+Bundle-SymbolicName: de.thm.sre_plugin; singleton:=true
+Bundle-Category: protege
+Bundle-Description: A Protégé plugin implementing the SRE Algorithm for debugging complex SWRL rules
+Bundle-Vendor: THM-KITE
+Bundle-DocURL: https://github.com/KITE-Cloud/SRE
+Bundle-ClassPath: .
+Bundle-Version: 1.0.3
+Bundle-Activator: org.protege.editor.core.plugin.DefaultPluginActivator
