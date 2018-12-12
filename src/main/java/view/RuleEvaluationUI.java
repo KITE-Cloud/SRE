@@ -53,17 +53,10 @@ public class RuleEvaluationUI extends JPanel implements ActionListener, GraphNod
     private boolean evaluating;
 
     public RuleEvaluationUI() {
-
-        System.out.println("vorher setLayout");
         this.setLayout(new BorderLayout());
-
-        System.out.println("vorher initializeRuleBar");
         initializeRuleBar();
-        System.out.println("vorher initializeCajunGraph");
         initializeCajunGraph();
-        System.out.println("vorher initializeConsoleArea");
         initializeConsoleArea();
-        System.out.println("vorher extendToolbar");
         extendToolbar();
     }
 
@@ -267,12 +260,9 @@ public class RuleEvaluationUI extends JPanel implements ActionListener, GraphNod
 
     @Override
     public void ontologiesChanged(@Nonnull List<? extends OWLOntologyChange> changes) throws OWLException {
-        executorService.execute(new Runnable() {
-            @Override
-            public void run() {
+        executorService.execute(() -> {
                 if(!evaluating)
                     fillRuleBox();
-            }
         });
 
     }
