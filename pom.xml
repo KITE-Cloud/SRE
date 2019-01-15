@@ -23,7 +23,6 @@
         <slf4j.version>1.7.25</slf4j.version>
         <swrlapi.version>2.0.5</swrlapi.version>
         <swrlapi.drools.version>2.0.5</swrlapi.drools.version>
-        <jetty.plugin.version>9.3.9.v20160517</jetty.plugin.version>
     </properties>
 
     <build>
@@ -52,15 +51,6 @@
                     </webResources>
                 </configuration>
             </plugin>
-            <plugin>
-                <groupId>org.eclipse.jetty</groupId>
-                <artifactId>jetty-maven-plugin</artifactId>
-                <version>${jetty.plugin.version}</version>
-                <configuration>
-                    <scanIntervalSeconds>2</scanIntervalSeconds>
-                </configuration>
-            </plugin>
-
             <plugin>
                 <groupId>org.apache.felix</groupId>
                 <artifactId>maven-bundle-plugin</artifactId>
