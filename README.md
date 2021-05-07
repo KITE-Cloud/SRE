@@ -4,7 +4,7 @@
 
 Protégé in a graphical editor that can be used to model and create OWL ontologies. SRE Plugin extends Protégé with the ability to interactively debug rules expressed in Semantic Web Rule Language (SWRL). For this purpose, the plugin provides implementation of our proposed SRE algorithm. This helps locating logical inconsistencies in the rule base when ontologies increase in size and complexity.
 
-For the citation of SRE Plugin, please refer to our publication:
+For citation of SRE Plugin, please refer to our publication:
 [Geyer J, Nguyen J, Farrenkopf T, Guckert M. (2018) Single Rule Evaluation (SRE): Computational Algorithmic Debugging for Complex SWRL Rules, IC3K 2018, 10th International Joint Conference on Knowledge Discovery, Knowledge Engineering and Knowledge Management, Seville, Spain](https://www.scitepress.org/Papers/2018/69241/69241.pdf)
 
 
