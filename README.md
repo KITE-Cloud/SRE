@@ -25,4 +25,4 @@ Debugging reveals values of rule atoms that are computed during reasoning. As co
 ![protegeViewer](https://user-images.githubusercontent.com/39269984/117508280-9aa74a80-af88-11eb-82ed-5464d7e7e001.PNG)
 
 ## Licensing
-AGADE Traffic is an open source product licensed under GPLv3
+SRE Plugin is an open source product licensed under GPLv3
