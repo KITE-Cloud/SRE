@@ -23,3 +23,6 @@ The graphical user interface of SRE is integrated into Protége and divided into
 Debugging reveals values of rule atoms that are computed during reasoning. As computed values are specific to individuals, users need to interactively choose the individuals they intend to study. The canvas area visualises results of the evaluated rule atoms. Rules are visualised as a tree structure using Cajun Visualization Library. To access detailed information on rule atoms click on the relevant node in the tree structure which opens a pop-up window. Finally, the bottom area of the plugin provides an output console containing logs from SRE evaluations. 
 
 ![protegeViewer](https://user-images.githubusercontent.com/39269984/117508280-9aa74a80-af88-11eb-82ed-5464d7e7e001.PNG)
+
+## Licensing
+AGADE Traffic is an open source product licensed under GPLv3
